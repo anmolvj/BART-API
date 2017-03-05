@@ -6,7 +6,7 @@ $( document ).ready(function() {
 
 
 
-	var minArivalTime = Number.POSITIVE_INFINITY;
+	var minArivalTime;
 
 	var sLat;
 	var sLong;
@@ -76,7 +76,7 @@ $( document ).ready(function() {
 		  		
 
 		  		$.get("/trips/" + source + "/" + destination, function(data, status){ 
-
+				var minArivalTime = Number.POSITIVE_INFINITY;
 
 			  	$.each(data.root.schedule.request.trip, function(key,value){
 
@@ -148,6 +148,7 @@ $( document ).ready(function() {
 
 
 		  		$.get("/trips/" + source + "/" + destination, function(data, status){ 
+					var minArivalTime = Number.POSITIVE_INFINITY;
 			  	$.each(data.root.schedule.request.trip, function(key,value){
 
 			  		var fare	= value.fare;//same
