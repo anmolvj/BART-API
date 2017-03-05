@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Home</title>
+	<link rel="stylesheet" href="./stylesheet/main.css">
+<link href="https://fonts.googleapis.com/css?family=Harmattan" rel="stylesheet">
+</head>
+<body>
+		
+
+		
+		<header id="select-div"><!-- DROPDOWN -->
+			<h1>Welcome</h1>	
+			<select  class='stations' id='source'> </select>
+			<select  class='stations' id='destination'> </select>
+			
+				<input type="submit" value="Lookup" id="lookup" class="submit-button">
+			
+		</header>
+
+		<aside id="source-info">
+			
+		</aside>
+
+		<section id="table-container">
+			<table id="table" > </table> <!-- TABLE -->
+		
+		
+		<!-- MAP -->
+			<div id="map" style="width: 70%; height: 300px; margin-top: 10px;"></div>
+		</section>
+
+	<footer>
+		<h2>Developed by Anmol Vijayvargiya</h2>
+		<h3>Lookup the application code at github.com/anmolcj/bart.webofthings.us</h3>
+	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="./js/main.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="/js/jquery.countdown.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtTjY35GY33ucgZrm62sM9Vhs3rV37AVc"
+    async defer></script> 
+
+
+</body>
+</html>

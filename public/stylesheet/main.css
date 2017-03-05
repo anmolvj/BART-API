@@ -1,0 +1,130 @@
+body,p,header,section,article,aside,h1,h2,h3,h4,h5,div,footer,aside,html,table,tr,td,th,select,input{
+	margin: 0;
+	padding: 0;
+	border: none;
+	font-family: 'Harmattan', sans-serif;
+}
+
+
+html{
+	min-height: 100vh;
+	position: relative;
+}
+body{
+	background-color:#ffb366;
+	font-family: 'Harmattan', sans-serif;
+	font-size: 20px;
+	width: 100vw;
+	
+
+}
+
+table{
+	background-color: lightgrey;
+	text-align: center;
+	margin: auto;
+	border-radius: 10px;
+	-moz-box-shadow: 0vw 0vw  3vw grey;
+	-webkit-box-shadow: 0vw 0vw  3vw grey;
+	box-shadow: 0vw 0vw  50px grey;
+	border: 1px solid lightgrey; 
+	border: none;
+}
+
+#table-container{
+
+	width: 70%;
+	margin: auto;
+	margin-bottom: 50px;
+}
+
+.border{
+	border: 1px solid lightgrey;
+}
+
+table tr{
+	padding: 10px;
+}
+
+table th{
+	padding: 10px;
+}
+table td{
+	padding: 10px;
+}
+
+select{
+	height: 50px;
+	font-family: 'Harmattan', sans-serif;
+	font-size: 1.5vw;
+	margin-top: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
+
+}
+
+#lookup:focus{
+	outline: 0;
+}
+
+#select-div{
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+#button-div{
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	margin: auto;
+	width: 70%;
+
+}
+
+.submit-button{
+	font-size: 25px;
+	font-family: 'Harmattan', sans-serif;
+	background-color:  #ff5050;
+	border-radius: 0.7vw;
+	width: 8vw;
+	-moz-box-shadow: 0vw 0vw  3vw grey;
+	-webkit-box-shadow: 0vw 0vw  3vw grey;
+	box-shadow: 0vw 0vw  10px grey;
+}
+
+footer{
+	background-color:  #ff4d4d;
+	-moz-box-shadow: 0vw 0vw  3vw grey;
+	-webkit-box-shadow: 0vw 0vw  3vw grey;
+	box-shadow: 0vw 0vw  10px grey;
+	border-radius: 0.7vw;
+     bottom: 0;
+     position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow:hidden;
+   text-align: center;  
+   
+   width:100%;
+   font-family: 'Harmattan', sans-serif;
+}
+
+#source-info{
+	font-family: 'Harmattan', sans-serif;
+	width: 20%;
+	float: left;
+	background-color: #cc6600;
+	border-radius: 0.7vw;
+	-moz-box-shadow: 0vw 0vw  3vw grey;
+	-webkit-box-shadow: 0vw 0vw  3vw grey;
+	box-shadow: 0vw 0vw  10px grey;
+	text-align: center;
+}
+
+#map{
+	margin: auto;
+}
+
+
