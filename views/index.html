@@ -6,18 +6,22 @@
 	<title>Home</title>
 	<link rel="stylesheet" href="./stylesheet/main.css">
 <link href="https://fonts.googleapis.com/css?family=Harmattan" rel="stylesheet">
+<link rel="stylesheet" href="./stylesheet/timeTo.css">
 </head>
 <body>
 		
 
 		
 		<header id="select-div"><!-- DROPDOWN -->
-			<h1>Welcome</h1>	
+			<h1>•W•E•L•C•O•M•E•</h1>
+
 			<select  class='stations' id='source'> </select>
 			<select  class='stations' id='destination'> </select>
 			
-				<input type="submit" value="Lookup" id="lookup" class="submit-button">
-			
+			<input type="submit" value="Lookup" id="lookup" class="submit-button">
+
+			<h2 id="depart-text">• Next train Departure ClockDown •</h2>
+			<div id="clockC" style="margin-top: 20px;"></div>
 		</header>
 
 		<aside id="source-info">
@@ -25,9 +29,10 @@
 		</aside>
 
 		<section id="table-container">
+			 
+
+
 			<table id="table" > </table> <!-- TABLE -->
-		
-		
 		<!-- MAP -->
 			<div id="map" style="width: 70%; height: 300px; margin-top: 10px;"></div>
 		</section>
@@ -38,9 +43,10 @@
 	</footer>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="./js/main.js" type="text/javascript" charset="utf-8" async defer></script>
-	<script src="/js/jquery.countdown.min.js"></script>
+	
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtTjY35GY33ucgZrm62sM9Vhs3rV37AVc"
     async defer></script> 
+    <script src="./js/jquery.time-to.min.js" type="text/javascript" charset="utf-8" async defer></script>
 
 
 </body>

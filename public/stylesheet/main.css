@@ -128,3 +128,19 @@ footer{
 }
 
 
+#clock{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+#depart-text{
+	display: none;
+}
+
+.show{
+	display: block;
+}
+
+
+

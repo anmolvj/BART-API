@@ -4,6 +4,10 @@ $( document ).ready(function() {
 	populate();
 
 
+
+
+	var minArivalTime = Number.POSITIVE_INFINITY;
+
 	var sLat;
 	var sLong;
 	var dLat;
@@ -15,9 +19,10 @@ $( document ).ready(function() {
 	var sState;
 	var sZip;
 	
+	
 	var intervalID	= 0;
-	var earliest ;
-    
+	var coming ;
+   
     var trainOrigin;
 	var trainDestination;
 	
@@ -52,25 +57,26 @@ $( document ).ready(function() {
 					sCounty 	= data.root.stations.station.county;
 					sState 		= data.root.stations.station.state;
 					sZip 		= data.root.stations.station.zipcode;
-		  			console.log(sLat,sLong);
+		  			
 		  			$("#source-info").append($('<h2>'+ trainOrigin+'</h2>' + '<p>Local Address: ' + sAddress + '</p>'  + '<p>City: ' + sCity + '</p>'+ '<p>County: ' + sCounty + '</p>' + '<p>State: ' + sState + '</p>' + '<p>City: ' + sCity + '</p>'  +'<p>ZipCode: ' + sZip + '</p>'));
 		  			$.get("/station/" + destination , function(data, status){ 
 
 		  			dLat	= data.root.stations.station.gtfs_latitude;
 		  			dLong	= data.root.stations.station.gtfs_longitude;
-		  			console.log(dLat,dLong);
+		  			
 		  			map(sLat,sLong,dLat,dLong);
 		  		});
 		  		});
 
 		  		
 
-		  		// MAP CODE 
+		  		
 		  		
 		  		
 		  		
 
 		  		$.get("/trips/" + source + "/" + destination, function(data, status){ 
+
 
 			  	$.each(data.root.schedule.request.trip, function(key,value){
 
@@ -79,8 +85,8 @@ $( document ).ready(function() {
 					var route 	= value.leg.line;
 	  				var arrival = value.leg.destTimeMin;
 	  				var departure = value.origTimeMin;
-	  				var date = value.destTimeDate;
-	  					  				
+	  				var date = value.origTimeDate;
+
 	  				var hours = Number(departure.match(/^(\d+)/)[1]);
 					var minutes = Number(departure.match(/:(\d+)/)[1]);
 					var AMPM = departure.match(/\s(.*)$/)[1];
@@ -90,26 +96,49 @@ $( document ).ready(function() {
 					var sMinutes = minutes.toString();
 					if(hours<10) sHours = "0" + sHours;
 					if(minutes<10) sMinutes = "0" + sMinutes;
-					var time = (sHours+":"+sMinutes);
 					
-					if(earliest == null){
-						earliest = time;
-					}else{
-						if(earliest>time){
-							earliest = time;
-							alert(earliest);
-						}
-					}
+
+					 
+
+					var trainTime=new Date(date+departure);
+					var arrivalTimeTotalSec=(trainTime-new Date())/1000;
+					var arrivalTimeMin= Math.floor(arrivalTimeTotalSec/60);
+					var arrivalTimesec= Math.abs(Math.floor(arrivalTimeTotalSec % 60));
+					
+					
+
+					 if(minArivalTime > arrivalTimeTotalSec && arrivalTimeTotalSec>0){
+
+              				minArivalTime=arrivalTimeTotalSec;
+             			}
+
+
+					
+					
+
+					var result = trainID + " | " + trainOrigin + "-->" + departure + " | " + trainDestination + "-->" + arrival + " $" + fare  + " | " ;
+	  				
 
 	  				$("#table").append($('<tr>' +'<td>'+ trainID +'</td>' +'<td>'+ trainOrigin+ '</td>'+ '<td>' + departure + '</td>' +'<td>' + trainDestination + '</td>'+ '<td>' + arrival + '</td>' + '<td>$' + fare +'</td>' + '</tr>'));
         			
-        			var result = trainID + " | " + trainOrigin + "-->" + departure + " | " + trainDestination + "-->" + arrival + " $" + fare  + " | " + earliest;
-	  				console.log(result);
+        			
 
         			});
+
+			  	$('#depart-text').css("display", "block");
+			  	$('#clockC').timeTo({
+
+					    seconds: Math.floor(minArivalTime)
+
+					});
+			  	console.log(minArivalTime);
 			  	});
 
+			  	
+
 		  		$('#table').addClass('border');
+
+
 			  	clearInterval(intervalID);
 		  		intervalID = setInterval(function(){
 
@@ -124,8 +153,6 @@ $( document ).ready(function() {
 			  		var fare	= value.fare;//same
 			  		var trainID = value.leg.trainId;//these are multiple
 					var route 	= value.leg.line;
-					// var trainOrigin = value.leg.origin;
-					// var trainDestination = value.leg.destination
 	  				var arrival = value.leg.destTimeMin;
 	  				var departure = value.origTimeMin;
 
@@ -138,23 +165,33 @@ $( document ).ready(function() {
 					var sMinutes = minutes.toString();
 					if(hours<10) sHours = "0" + sHours;
 					if(minutes<10) sMinutes = "0" + sMinutes;
-					var time = (sHours+":"+sMinutes);
+					var time = (hours*3600)+(minutes*60);
+					var date = value.origTimeDate;
+
+					var trainTime=new Date(date+ "" +departure);
+					var arrivalTimeTotalSec=(trainTime-new Date())/1000;
+					var arrivalTimeMin= Math.floor(arrivalTimeTotalSec/60);
+					var arrivalTimesec= Math.abs(Math.floor(arrivalTimeTotalSec % 60));
+					 
+
+					 if(minArivalTime > arrivalTimeTotalSec && arrivalTimeTotalSec>0){
+              				minArivalTime=arrivalTimeTotalSec;
+             			};
+
+
 					
-					if(earliest == null){
-						earliest = time;
-					}else{
-						if(earliest>time){
-							earliest = time;
-							alert(earliest);
-						}
-					}
 
 	  				$("#table").append($('<tr>' +'<td>'+ trainID +'</td>' +'<td>'+ trainOrigin+ '</td>'+ '<td>' + departure + '</td>' +'<td>' + trainDestination + '</td>'+ '<td>' + arrival + '</td>' + '<td>$' + fare +'</td>' + '</tr>'));
         			
-        			var result = trainID + " | " + trainOrigin + "-->" + departure + " | " + trainDestination + "-->" + arrival + " $" + fare  + " | " + earliest;
-	  				console.log(result);
+        			var result = trainID + " | " + trainOrigin + "-->" + departure + " | " + trainDestination + "-->" + arrival + " $" + fare  + " | " ;
+	  				
 
         			});
+				  		$('#clockC').timeTo({
+				  			
+						    seconds: Math.floor(minArivalTime)
+						});
+						console.log(minArivalTime);
 			  	});
 
 		  			},30000)
@@ -188,7 +225,7 @@ function populate(){
 	}
 
 function map(sLat,sLong,dLat,dLong){
-					console.log(sLat,sLong,dLat,dLong);
+					
 		  			var directionsService = new google.maps.DirectionsService;
 				    var directionsDisplay = new google.maps.DirectionsRenderer;
 				    var mapCanvas = document.getElementById("map");
